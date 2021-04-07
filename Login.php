@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Login</title>
+	<title>Thông báo</title>
 </head>
 <body>
 	<center>
 	<?php
-	$username=$_POST["uname"];
-	$password=$_POST["pwd"];
+	$username=$_POST["username"];
+	$password=$_POST["password"];
 	$check=false;
 	// tạo connection
 	$link = mysqli_connect("localhost","root","","info");
@@ -15,7 +15,7 @@
 	if (!$link) {
 	    die("Connection failed: " . mysqli_connect_error());
 	}
-	 
+	//lấy dữ liệu	 
 	$sql = "SELECT id, Username, Password FROM login";
 	$result = mysqli_query($link, $sql);
 	 
@@ -30,12 +30,8 @@
 	    		echo "Hi, $username";
 	    	} else {
 	    		echo"Wrong, check again";
-	    	}
-	       /* echo "id: " . $row["id"]. " - Name: " . $row["Username"]. " "
-	            . $row["Password"]. "<br>"; */
-	    
-	}
-	 
+	    	} 
+	}	 
 	mysqli_close($link);
 	?>
 	</center>
