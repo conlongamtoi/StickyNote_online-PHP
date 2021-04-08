@@ -28,6 +28,13 @@
 	    }
 	    	if ($check==true){
 	    		echo "Hi, $username";
+	   			echo '<br>
+	   			<button onclick="myFunction()">Bấm để tiếp tục</button>
+					<script>
+						function myFunction() {
+  						location.replace("https://google.com")
+					}
+					</script>';
 	    	} else {
 	    		echo"Wrong, check again";
 	    	} 
