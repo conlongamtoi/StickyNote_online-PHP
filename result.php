@@ -8,9 +8,9 @@
 	<?php 
 		$username=$_POST["username"];
 		$password=$_POST["password"];
-		$passwordd1=$_POST["password1"];
-		$match=false;	
-		if ($password==$password1 and $password!='' and $username!='') {
+		$password1=$_POST["password1"];
+		$match=false;
+		$fail=false;
 	/* Kết nối máy chủ MySQL */
 		$link = mysqli_connect("localhost", "root", "", "info");
  
@@ -18,7 +18,8 @@
 		if($link === false){
 		    die("ERROR: Không thể kết nối. " . mysqli_connect_error());
 		}	
-	}
+		if ($password==$password1 and $password!='' and $username!='' and strlen($password)>=6) {
+	
 	//Kiểm tra tên đăng nhập
 		$sql = "SELECT id, Username FROM login";
 		$result = mysqli_query($link, $sql);
@@ -27,9 +28,12 @@
 	    		$match=true;
 	    	}
 	    }
-	    
+	} else{
+		echo"Tên đăng nhập hoặc mật khẩu không đủ điều kiện, vui lòng thử lại";
+		$fail=true;
+	}    
 	//Insert dữ liệu 
-			if ($match==false){
+			if ($match==false and $fail==false){
 		$sql = "INSERT INTO login (Username, Password) VALUES ('$username', '$password')";
 		if(mysqli_query($link, $sql)){
 		    echo ("Đăng kí thành công");
@@ -38,7 +42,7 @@
 		}
  
 
-		}else{
+		}else if($match==true and $fail==false){
 			echo "Trùng tên đăng nhập, vui lòng thử lại";
 		}
 	// Đóng kết nối
